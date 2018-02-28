@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <section>
-            <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+            <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" labelPosition="top" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="账号" prop="uname">
                     <el-input type="text" v-model="ruleForm2.uname" auto-complete="off"></el-input>
                 </el-form-item>
@@ -10,8 +10,8 @@
                 </el-form-item>
 
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('ruleForm2')">登陆</el-button>
-                    <el-button @click="resetForm('ruleForm2')">重置</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm2')" round>登陆</el-button>
+                    <el-button type="danger" @click="resetForm('ruleForm2')" round>重置</el-button>
                 </el-form-item>
             </el-form>
         </section>
@@ -69,6 +69,7 @@ section {
   height: 300px;
   border: 3px solid #fff;
   margin: 0 auto;
+  padding: 15px;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
