@@ -1,6 +1,6 @@
 <template>
     <div>
-222
+        购物车
     </div>
 </template>
 
