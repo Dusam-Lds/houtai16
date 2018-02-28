@@ -6,6 +6,7 @@ import App from './component/App.vue'//引入脚本和App
 
 import axios from 'axios'
 import api,{domain} from './js/api.js'
+import './less/index.less'
 
 
 Vue.use(ElementUI)
