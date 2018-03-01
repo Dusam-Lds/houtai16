@@ -34,13 +34,16 @@ export default {
   },
   methods: {
     login() {
-      this.$http.post(this.$api.login, this.ruleForm2).then((res) => {
-          if(res.data.status==0) {
-              this.$alert("登陆成功");
-          }else {
-              this.$alert(res.data.message);
-          }
-        
+      this.$http.post(this.$api.login, this.ruleForm2).then(res => {
+        if (res.data.status == 0) {
+          this.$alert("登陆成功", "提示", {
+            callback: () => {
+              this.$router.push({ name: "admin" });
+            }
+          });
+        } else {
+          this.$alert(res.data.message);
+        }
       });
     },
     submitForm(formName) {
