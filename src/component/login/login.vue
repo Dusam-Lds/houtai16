@@ -38,6 +38,8 @@ export default {
         if (res.data.status == 0) {
           this.$alert("登陆成功", "提示", {
             callback: () => {
+              //保存用户姓名
+              localStorage.setItem('uname',res.data.message.uname);
               this.$router.push({ name: "admin" });
             }
           });

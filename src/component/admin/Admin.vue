@@ -2,9 +2,13 @@
     <div class="admin">
         <!-- 公共部 -->
         <el-container>
-            <el-header>Header</el-header>
+            <el-header>
+                <app-header></app-header>
+            </el-header>
             <el-container class="admin_content">
-                <el-aside width="200px">Aside</el-aside>
+                <el-aside width="200px">
+                    <app-aside></app-aside>
+                </el-aside>
                 <el-main>
                     <router-view>main</router-view>
                 </el-main>
@@ -32,8 +36,8 @@ export default {
         height: 100%;
     }
     .el-header {
-        height: 60px;
-        background:#ccc;
+        line-height: 60px;
+        background:rgb(208, 229, 235);
     }
     .el-container {
         height: 100%;
