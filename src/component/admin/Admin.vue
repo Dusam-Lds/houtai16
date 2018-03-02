@@ -51,7 +51,7 @@ export default {
     }
     .el-aside {
         height: 100%;
-        background: papayawhip;
+        background: #545c64;
     }
     
 </style>
