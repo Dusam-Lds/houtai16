@@ -41,7 +41,6 @@ export default {
     }
     .el-container {
         height: 100%;
-        background: red;
         
     }
     //在less中，对上级选择器的引用
