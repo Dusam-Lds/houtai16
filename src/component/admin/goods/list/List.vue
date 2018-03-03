@@ -9,12 +9,12 @@
         <section class="list_btns">
             <el-button type="info" size="small" plain>新增</el-button>
             <el-button type="info" size="small" plain>全选</el-button>
-            <el-button type="info" size="small" plain>删除</el-button>
+            <el-button type="info" size="small" plain @click="del">删除</el-button>
             <div class="list_btns_right">
                 <el-input size="small" placeholder="请输入内容" prefix-icon="el-icon-search" v-model="apiQuery.searchvalue" @blur="search"></el-input>
             </div>
         </section>
-        <el-table ref="multipleTable" :data="tableData3" style="width: 100%">
+        <el-table ref="multipleTable" :data="tableData3" style="width: 100%" @selection-change="change">
              
              <!-- type为selection, 即多选框 -->
              <el-table-column type="selection" width="55"></el-table-column>
@@ -60,6 +60,7 @@ export default {
         pageIndex: 1,
         pageSize: 10
       },
+      
       tableData3: [
         {
           date: "2016-05-03",
@@ -77,10 +78,26 @@ export default {
           address: "上海市普陀区金沙江路 1518 弄"
         }
       ],
+      //被选中的商品数据
+      selectedGoodsList:[],
       multipleSelection: []
     };
   }, 
   methods: {
+    del() {
+      let delIDS = this.selectedGoodsList.map(v=>v.id);
+      // console.log(this.selectedGoodsList.map);
+      
+      this.$http.get(this.$api.gsDel + delIDS).then((res) => {
+        if(res.data.status==0) {
+          this.getGoodsData();
+        }
+      })
+    },
+    change(selection) {
+      console.log(selection)
+      this.selectedGoodsList = selection;
+    },
     search() {
       this.getGoodsData();
     },
