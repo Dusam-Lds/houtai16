@@ -77,21 +77,10 @@ export default {
           date: "2016-05-03",
           name: "王小虎",
           address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
         }
       ],
       //被选中的商品数据
-      selectedGoodsList: [],
-      multipleSelection: []
+      selectedGoodsList: []
     };
   },
   methods: {
@@ -123,22 +112,12 @@ export default {
         this.apiQuery.searchvalue
       }`;
       this.$http.get(api).then(res => {
+        // console.log(res);
+        
         if (res.data.status == 0) {
           this.tableData3 = res.data.message;
         }
       });
-    },
-    toggleSelection(rows) {
-      if (rows) {
-        rows.forEach(row => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
-      } else {
-        this.$refs.multipleTable.clearSelection();
-      }
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
     }
   },
   //页面加载完成，就执行
