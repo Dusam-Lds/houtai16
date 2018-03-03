@@ -8,7 +8,7 @@
     </el-breadcrumb>
     <section class="list_btns">
       <el-button type="info" size="small" plain>新增</el-button>
-      <el-button type="info" size="small" plain>全选</el-button>
+      <el-button type="info" size="small" plain @click="all">全选</el-button>
       <el-button type="info" size="small" plain @click="del">删除</el-button>
       <div class="list_btns_right">
         <el-input size="small" placeholder="请输入内容" prefix-icon="el-icon-search" v-model="apiQuery.searchvalue" @blur="search"></el-input>
@@ -25,10 +25,10 @@
         <template slot-scope="scope">
           <el-tooltip class="item" effect="dark" content="Right Center 提示文字" placement="right">
             <div slot="content">
-              <img :src="scope.row.imgurl" alt="" width=200>
+              <img :src="scope.row.imgurl" alt="商品图片" width=200>
             </div>
-            <router-link style="color: #666;" :to="{ name: 'goodsDetail' }">{{ scope.row.title }}</router-link>
-          </el-tooltip>
+            <router-link style="color: #666;" :to="{ path:`/admin/goods/detail/${scope.row.id}` }">{{ scope.row.title }}</router-link>
+          </el-tooltip>                               
 
         </template>
 
@@ -46,12 +46,16 @@
 
       <el-table-column label="属性" width="120" show-overflow-tooltip>
         <!-- 注意template要加slot-scope属性 -->
-        <template slot-scope="scope">里面是三个图标</template>
+        <template slot-scope="scope">
+          <span :class="['el-icon-picture-outline',scope.row.is_slide==1?'active':'']"></span>
+          <span :class="['el-icon-upload2',scope.row.is_top==1?'active':'']"></span>
+          <span :class="['el-icon-star-off',scope.row.is_top==1?'active':'']"></span>
+        </template>
       </el-table-column>
 
       <el-table-column label="操作" width="120" show-overflow-tooltip>
         <template slot-scope="scope">
-          <router-link style="color: #666;" :to="{ name: 'goodsDetail' }">修改</router-link>
+          <router-link style="color: #666;" :to="{ path: `/admin/goods/detail/${scope.row.id}` }">修改</router-link>
         </template>
       </el-table-column>
     </el-table>
@@ -101,6 +105,9 @@ export default {
         }
       });
     },
+    all() {
+      document.querySelector('.el-checkbox__inner').click();
+    },
     change(selection) {
       // console.log(selection)
       this.selectedGoodsList = selection;
@@ -149,6 +156,10 @@ export default {
     &_right {
       float: right;
     }
+  }
+  [class^=el-icon].active {
+    font-weight: bold;
+    color: #000000;
   }
 }
 </style>
