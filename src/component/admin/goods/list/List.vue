@@ -28,7 +28,7 @@
               <img :src="scope.row.imgurl" alt="商品图片" width=200>
             </div>
             <router-link style="color: #666;" :to="{ path:`/admin/goods/detail/${scope.row.id}` }">{{ scope.row.title }}</router-link>
-          </el-tooltip>                               
+          </el-tooltip>
 
         </template>
 
@@ -59,6 +59,10 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination :total="apiQuery.total" @size-change="handleSizeChange" @current-change="handleCurrentChange" 
+    :current-page="apiQuery.pageIndex" :page-sizes="[2, 4, 6, 8]" :page-size="apiQuery.pageSize" 
+    layout="total, sizes, prev, pager, next, jumper">
+    </el-pagination>
   </div>
 </template>
 
@@ -69,7 +73,8 @@ export default {
       apiQuery: {
         searchvalue: "",
         pageIndex: 1,
-        pageSize: 10
+        pageSize: 2,
+        total: 0
       },
 
       tableData3: [
@@ -91,11 +96,13 @@ export default {
       this.$http.get(this.$api.gsDel + delIDS).then(res => {
         if (res.data.status == 0) {
           this.getGoodsData();
+          
+          
         }
       });
     },
     all() {
-      document.querySelector('.el-checkbox__inner').click();
+      document.querySelector(".el-checkbox__inner").click();
     },
     change(selection) {
       // console.log(selection)
@@ -113,11 +120,26 @@ export default {
       }`;
       this.$http.get(api).then(res => {
         // console.log(res);
-        
+
         if (res.data.status == 0) {
           this.tableData3 = res.data.message;
+          //把后端接口返回的数量总量赋值给分业组件使用
+          this.apiQuery.total = res.data.totalcount;
+          // console.log(res.data);
         }
       });
+    },
+    //监听页数的变更事件
+    handleSizeChange(size) {
+      this.apiQuery.pageSize = size;
+      //表格也要跟着重新刷新
+      this.getGoodsData();
+    },
+    //监听页码的变更事件
+    handleCurrentChange(page) {
+      this.apiQuery.pageIndex = page;
+      //表格也要跟着重新刷新
+      this.getGoodsData();
     }
   },
   //页面加载完成，就执行
@@ -136,7 +158,7 @@ export default {
       float: right;
     }
   }
-  [class^=el-icon].active {
+  [class^="el-icon"].active {
     font-weight: bold;
     color: #000000;
   }
