@@ -15,7 +15,7 @@ Vue.use(VueRouter)
 const goods = [
     //这是子路由
     { name: 'goodList', path: 'goods/list', component: GoodsList},
-    { name: 'goodDetail', path: 'goods/detail:id', component: GoodsDetail},
+    { name: 'goodDetail', path: 'goods/detail/:id', component: GoodsDetail},
     { name: 'goodComment', path: 'goods/comment', component: GoodsComment}
 ]
 export default new VueRouter ({

@@ -62,7 +62,7 @@
     <el-pagination :total="apiQuery.total" @size-change="handleSizeChange" @current-change="handleCurrentChange" 
     :current-page="apiQuery.pageIndex" :page-sizes="[2, 4, 6, 8]" :page-size="apiQuery.pageSize" 
     layout="total, sizes, prev, pager, next, jumper">
-    </el-pagination>
+    </el-pagination>  
   </div>
 </template>
 
